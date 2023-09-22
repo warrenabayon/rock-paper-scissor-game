@@ -8,6 +8,35 @@
 </head>
 <body>
     
+    <button onclick="myFunction()">add</button>
+
+    <p id ="demo">0</p>
+    <p id ='demo2'></p>
+
+    <!-- <script>
+
+        //self-invoking functions // runs without calling (function (){ code here})();
+
+        const add = (
+            function(){
+                let counter = 0;
+                return function plus(){
+                    counter++;
+                    return counter;
+                }
+                
+            } ) ();
+        
+
+       
+
+      
+
+        function myFunction(){
+            document.getElementById('demo').innerHTML= add();
+        }
+        
+    </script> -->
 
     <script src="/js/scripts.js"></script>
 </body>
