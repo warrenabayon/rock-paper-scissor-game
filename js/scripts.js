@@ -10,7 +10,6 @@ let playerScore = 0;
 let drawScore = 0;
 
 // console.log(playRound('paper', getComputerChoice()));
-
 function getComputerChoice() { //get computer choice
     let randomNumber = Math.random();
     let computerChoice = (randomNumber <= 1/3) ? 'Rock' :
@@ -20,10 +19,9 @@ function getComputerChoice() { //get computer choice
 }
 
 function playRound(playerSelection, computerSelection) { // compare choices // You Lose! Paper beats Rock
-
     let result = '';
     let playerSelect = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase(); // convert to accept text lower and uppoer case
-    let computerSelect = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1).toLowerCase();
+     computerSelect = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1).toLowerCase();
     
     // console.log(playerSelect); // check converstion
     // console.log(computerSelect);
@@ -87,19 +85,42 @@ function playRound(playerSelection, computerSelection) { // compare choices // Y
 ///for
 function game(roundCount = 1) {
 
+    const playerPick = prompt('Chouce your pick');
+    
     for (i = 1; i <= roundCount; i++){
         // console.log(`Run: ${i}`);
-        console.log(`${playRound('paper', getComputerChoice())} run:${i}`);
-        
+        console.log(`${playRound( playerPick, getComputerChoice())} run:${i}`);     
+       
     }
     
-    let finaResult = (playerScore > computerScore) ? 'PLAYER WINS OVERALL' : 'COMPUTER WINS OVERALL';
+
+    let finaResult = (playerScore > computerScore) ? 'PLAYER WINS OVERALL' : 
+    (playerScore === computerScore) ? 'THE GAME IS DRAW' : 'COMPUTER WINS OVERALL';
     console.log(finaResult); // show the final result
 
 }
 
-game(20);
+game(10);
 
 
 
 
+
+
+
+function testa(v1, v2) {
+    let sum = v1 + v2;
+
+    return sum;
+} 
+
+
+
+function getGrades() {
+    let initial = testa(5,10);
+
+    let totalGrade = (v1 > v2)? 'v1 is hight': 'v2 is hight';
+    return totalGrade + ' ' + skill;
+}
+
+console.log(getGrades());
