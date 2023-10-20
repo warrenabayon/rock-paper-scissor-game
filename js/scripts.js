@@ -1,6 +1,4 @@
 
-let userCounter = 0;
-let comCounter = 0;
 
 
 function computerPick () {
@@ -13,59 +11,100 @@ function computerPick () {
 // console.log(computerPick());
 
 
-function playGame (userPick, comPick) {
+function playGame (playerPick, comPick) {
     
-    const uPick = userPick.toUpperCase();
+    const pPick = playerPick.toUpperCase();
     const cPick = comPick.toUpperCase();
     let result = '';
+    const playerScore = document.querySelector('.score .player');
+    const computerScore = document.querySelector('.score .computer');
 
 
-    if (uPick === 'ROCK') {
+    if (pPick === 'ROCK') {
         if (cPick === 'ROCK') {
             result = 'DRAW';
         } else if (cPick === 'PAPER') {
             result = 'COMPUTER WIN';
-            comCounter++;
+            
+            computerScore.textContent = addScoreComputer();
+            
         } else if (cPick === 'SCISSOR') {
             result = 'YOU WIN';
-            console.log(addScore());
+            playerScore.textContent = addScorePlayer();
         }
-    } else if (uPick === 'PAPER') {
+    } else if (pPick === 'PAPER') {
         if (cPick === 'ROCK') {
             result = 'YOU WIN';
-            console.log(addScore());
+            playerScore.textContent = addScorePlayer();
         } else if (cPick === 'PAPER') {
             result = 'DRAW';
         } else if (cPick === 'SCISSOR') {
             result = 'COMPUTER WIN';
-            comCounter++;
+            computerScore.textContent = addScoreComputer();
         }
-    } else if (uPick === 'SCISSOR') {
+    } else if (pPick === 'SCISSOR') {
         if (cPick === 'ROCK') {
             result = 'COMPUTER WIN';
-            comCounter++;
+            computerScore.textContent = addScoreComputer();
         } else if (cPick === 'PAPER') {
             result = 'YOU WIN';
-            console.log(addScore());
+            playerScore.textContent = addScorePlayer();
         } else if (cPick === 'SCISSOR') {
             result = 'DRAW';
         }
     }
 
 
-
-  
-
     //showing the output
-    const userPickTxt = document.querySelector('.u-pick')
+    const col = document.querySelector('.col');
+    const score = document.querySelector('.score');
+    const container = document.querySelector('.container');
+    const playerPickTxt = document.querySelector('.p-pick');
     const comPickTxt = document.querySelector('.c-pick');
-    const winnerTxt = document.querySelector('.winner');
-    const userCount = document.querySelector('.user-score h3');
-    userPickTxt.textContent = uPick;
+    const resultTxt = document.querySelector('.result');
+    const winnerTxt = document.createElement('h2');
+    playerPickTxt.textContent = pPick;
     comPickTxt.textContent = cPick;
-    winnerTxt.textContent = result;
-    userCount.textContent = userCounter;
-   
+    resultTxt.textContent = result;
+
+    
+    //check the winner
+    if (playerScore.textContent === '3'){
+        winnerResult('Player');     
+        
+
+    } else if (computerScore.textContent === '3') {
+        winnerResult('Computer'); 
+    
+        
+    }
+
+    function winnerResult (winner) {
+
+        winnerTxt.textContent = `${winner} Wins`;
+        score.setAttribute('class', 'score hide')
+        col.setAttribute('class', 'col hide')
+        container.appendChild(winnerTxt);
+        reset();
+        return `${winner} Wins`;
+
+    }
+
+
+    function reset() {
+        const resetBtn = document.createElement('button');
+        resetBtn.setAttribute('class', 'reset');
+        resetBtn.textContent = 'Reset';
+        container.appendChild(resetBtn);
+
+        resetBtn.addEventListener('click', () => {
+
+            window.location.reload();
+        })
+    }
+
+
+
     
     return result;
 }
@@ -73,7 +112,16 @@ function playGame (userPick, comPick) {
 
 
 //add score
-const addScore =(function (){ // self-invoking function
+const addScorePlayer =(function (){ // self-invoking function
+    let score = 0;
+    return function plus(){
+        score++; 
+        return score;
+    }  
+    ;                   
+})();
+
+const addScoreComputer =(function (){ // self-invoking function
     let score = 0;
     return function plus(){
         score++; 
@@ -83,7 +131,6 @@ const addScore =(function (){ // self-invoking function
 
 
 
-// console.log( playGame('ROCK', computerPick()));
 
     const rockBtn = document.querySelector('#rock');
     const paperBtn = document.querySelector('#paper');
