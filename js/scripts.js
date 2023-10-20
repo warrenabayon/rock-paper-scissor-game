@@ -1,86 +1,78 @@
-//
-// console.log('Hello World');
 
-//get compputer choice
-//get user choice
-//get result
+let userCounter = 0;
+let comCounter = 0;
 
-let computerScore = 0;
-// let playerScore = 0;
-let drawScore = 0;
 
-// console.log(playRound('paper', getComputerChoice()));
-function getComputerChoice() { //get computer choice
-    let randomNumber = Math.random();
-    let computerChoice = (randomNumber <= 1/3) ? 'Rock' :
-        (randomNumber <= 2/3) ? 'Paper' : 
-        'Scissor';       
-    return computerChoice;
+function computerPick () {
+    const randomNumber = Math.random();
+    const pick = (randomNumber <= 1/3) ? 'Rock' : 
+                 (randomNumber <= 2/3) ? 'Paper' : 'Scissor';
+    return pick;
 }
 
+// console.log(computerPick());
 
 
-
-function playRound(playerSelection, computerSelection) { // compare choices // You Lose! Paper beats Rock
+function playGame (userPick, comPick) {
+    
+    const uPick = userPick.toUpperCase();
+    const cPick = comPick.toUpperCase();
     let result = '';
-    let playerSelect = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase(); // convert to accept text lower and uppoer case
-     computerSelect = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1).toLowerCase();
-    
-    // console.log(playerSelect); // check converstion
-    // console.log(computerSelect);
 
-    if (playerSelect == 'Rock') {
 
-        if (computerSelect == 'Rock') {
-            result =  `DRAW! ${playerSelect} is equal to ${computerSelect}`;
-            drawScore++;
-        } else if (computerSelect == 'Paper'){
-            result =  `You Lose! ${playerSelect} lose to ${computerSelect}`;
-            computerScore++;
-        } else if (computerSelect == 'Scissor'){
-            result =  `You Win! ${playerSelect} beats ${computerSelect}`;
-            document.getElementById('demo').innerHTML= addScore();
+    if (uPick === 'ROCK') {
+        if (cPick === 'ROCK') {
+            result = 'DRAW';
+        } else if (cPick === 'PAPER') {
+            result = 'COMPUTER WIN';
+            comCounter++;
+        } else if (cPick === 'SCISSOR') {
+            result = 'YOU WIN';
+            console.log(addScore());
         }
+    } else if (uPick === 'PAPER') {
+        if (cPick === 'ROCK') {
+            result = 'YOU WIN';
+            console.log(addScore());
+        } else if (cPick === 'PAPER') {
+            result = 'DRAW';
+        } else if (cPick === 'SCISSOR') {
+            result = 'COMPUTER WIN';
+            comCounter++;
+        }
+    } else if (uPick === 'SCISSOR') {
+        if (cPick === 'ROCK') {
+            result = 'COMPUTER WIN';
+            comCounter++;
+        } else if (cPick === 'PAPER') {
+            result = 'YOU WIN';
+            console.log(addScore());
+        } else if (cPick === 'SCISSOR') {
+            result = 'DRAW';
+        }
+    }
 
-    
-    } else if (playerSelect == 'Paper') {
-        if (computerSelect == 'Rock') {
-            result =  `You Win! ${playerSelect} beats ${computerSelect}`;
-            document.getElementById('demo').innerHTML= addScore();
-        } else if (computerSelect == 'Paper'){
-            result =  `DRAW! ${playerSelect} is equal to ${computerSelect}`;
-            drawScore++;
-        } else if (computerSelect == 'Scissor'){
-            result =  `You Lose! ${playerSelect} lose to ${computerSelect}`;
-            computerScore++;
-        }
-        
-    
-    } else if (playerSelect == 'Scissor') {
-        if (computerSelect == 'Rock') {
-            result =  `You Lose! ${playerSelect} lose to ${computerSelec}`;
-            computerScore++;
-        } else if (computerSelect == 'Paper'){
-            result =  `You Win! ${playerSelect} beats ${computerSelect}`;
-            document.getElementById('demo').innerHTML= addScore();
-        } else if (computerSelect == 'Scissor'){
-            result =  `DRAW! ${playerSelect} is equal to ${computerSelect}`;
-            drawScore++;
-        }
-        
-    } 
-    
+
+
+  
+
+    //showing the output
+    const userPickTxt = document.querySelector('.u-pick')
+    const comPickTxt = document.querySelector('.c-pick');
+    const winnerTxt = document.querySelector('.winner');
+    const userCount = document.querySelector('.user-score h3');
+    userPickTxt.textContent = uPick;
+    comPickTxt.textContent = cPick;
+    winnerTxt.textContent = result;
+    userCount.textContent = userCounter;
    
-    console.log('  ' + computerScore + '  ' + drawScore); // show the score
     
     return result;
-    
-    
 }
 
 
 
-
+//add score
 const addScore =(function (){ // self-invoking function
     let score = 0;
     return function plus(){
@@ -90,60 +82,48 @@ const addScore =(function (){ // self-invoking function
 })();
 
 
-// console.log(getComputerChoice());
 
-// let string1 ='ROCK';
-// let string2 = string1.charAt(0).toUpperCase() + string1.slice(1).toLowerCase();
-// console.log(string2);
+// console.log( playGame('ROCK', computerPick()));
 
-function myFunction(){   
-    console.log(`${playRound( 'Rock', getComputerChoice())}`);
-    // document.getElementById('demo').innerHTML= addScore();
-}
+    const rockBtn = document.querySelector('#rock');
+    const paperBtn = document.querySelector('#paper');
+    const scissorBtn = document.querySelector('#scissor');
 
-   
+    rockBtn.addEventListener('click', () => playGame('Rock', computerPick()));
+    paperBtn.addEventListener('click', () => playGame('Paper', computerPick()));
+    scissorBtn.addEventListener('click', () => playGame('Scissor', computerPick()));
 
 
 
-// ///for
-// function game(roundCount = 1) {
 
-//     const playerPick = prompt('Chooce your pick');
+
+
     
-//     for (i = 1; i <= roundCount; i++){
-//         // console.log(`Run: ${i}`);
-//         console.log(`${playRound( playerPick, getComputerChoice())} run:${i}`);     
-       
-//     }
-     
-
-//     // let finaResult = (playerScore > computerScore) ? 'PLAYER WINS OVERALL' : 
-//     // (playerScore === computerScore) ? 'THE GAME IS DRAW' : 'COMPUTER WINS OVERALL';
-//     // console.log(finaResult); // show the final result
-
-// }
-
-// game(1);
 
 
 
 
+/*
+
+//self-invoking functions // runs without calling (function (){ code here})();
+
+const add = (
+    function(){
+        let counter = 0;
+        return function plus(){
+            counter++;
+            return counter;
+        }
+        
+    } ) ();
 
 
 
-function testa(v1, v2) {
-    let sum = v1 + v2;
-
-    return sum;
-} 
 
 
 
-// function getGrades() {
-//     let initial = testa(5,10);
+function myFunction(){
+    document.getElementById('demo').innerHTML= add();
+}
+*/
 
-//     let totalGrade = (v1 > v2)? 'v1 is hight': 'v2 is hight';
-//     return totalGrade + ' ' + skill;
-// }
-
-// console.log(getGrades());

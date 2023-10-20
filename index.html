@@ -4,40 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     
-    <button onclick="myFunction()">add</button>
-
-    <p id ="demo">0</p>
-    <p id ='demo2'></p>
-
-    <!-- <script>
-
-        //self-invoking functions // runs without calling (function (){ code here})();
-
-        const add = (
-            function(){
-                let counter = 0;
-                return function plus(){
-                    counter++;
-                    return counter;
-                }
-                
-            } ) ();
+    <div class="container">
+        <h1>Rock Paper Scissor</h1>
+        <div class="score"> 
+            <div class="">
+                <h3>Player</h3>
+                <span class="player">0</span>
+            </div>
+            <div class="">
+                <h3>Computer</h3>
+                <span class="computer">0</span>
+            </div>
+        </div>
+            
+        
+        <div class="col">
+            <h2>Choose your Weapon</h2>
+            
+            <div class="picks">
+                <button id = "rock">Rock</button>
+                <button id = "paper">Paper</button>
+                <button id = "scissor">Scissor</button>
+            </div>   
+            <h4>Moves Left: <span class="moves">10</h4>  
+            <h3 class="result">DRAW</h3>              
+        </div>
         
 
-       
 
-      
 
-        function myFunction(){
-            document.getElementById('demo').innerHTML= add();
-        }
-        
-    </script> -->
+    </div>
 
-    <script src="/js/scripts.js"></script>
+   
+
+
+
+  
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>
